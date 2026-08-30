@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #E7E1D3;
-  --canvas-soft: #F1ECE0;
-  --ink: #2C2620;
-  --ink-soft: #5A5245;
-  --berry: #A73B52;
-  --berry-deep: #8F3044;
-  --ochre: #C6862E;
-  --moss: #5B6B45;
-  --plum: #6C4E6E;
+  --canvas: #F1E5E3;
+  --canvas-soft: #FFF8F5;
+  --ink: #302629;
+  --ink-soft: #705D62;
+  --berry: #B94D68;
+  --berry-deep: #963B54;
+  --ochre: #D49A72;
+  --moss: #74816C;
+  --plum: #806174;
   --font-display: 'Coustard', serif;
   --font-body: 'Karla', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
@@ -24,7 +24,14 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { min-width: 320px; margin: 0; background: var(--canvas); }
+body {
+  min-width: 320px;
+  margin: 0;
+  background-color: var(--canvas);
+  /* A quiet, repeating crochet stitch: visible on the paper, never competing with the work. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M2 12c4-7 10-7 14 0s10 7 14 0 10-7 16 0' fill='none' stroke='%23B94D68' stroke-opacity='.075' stroke-width='1.15' stroke-linecap='round'/%3E%3Cpath d='M2 36c4-7 10-7 14 0s10 7 14 0 10-7 16 0' fill='none' stroke='%23B94D68' stroke-opacity='.075' stroke-width='1.15' stroke-linecap='round'/%3E%3Cpath d='M12 2c-7 4-7 10 0 14s7 10 0 14-7 10 0 16' fill='none' stroke='%2374816C' stroke-opacity='.045' stroke-width='1.05' stroke-linecap='round'/%3E%3Cpath d='M36 2c-7 4-7 10 0 14s7 10 0 14-7 10 0 16' fill='none' stroke='%2374816C' stroke-opacity='.045' stroke-width='1.05' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 48px 48px;
+}
 button, input, textarea { font: inherit; }
 button { cursor: pointer; }
 a { color: inherit; }
@@ -87,6 +94,10 @@ h1 { margin-bottom: 20px; font-size: clamp(4.3rem, 10vw, 8.6rem); line-height: 0
 
 .work-section { padding-block: 90px 120px; }
 .section-heading { display: grid; margin-bottom: 42px; grid-template-columns: 1fr; }
+.work-heading-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 9px 16px; }
+.work-heading-meta .eyebrow { margin-bottom: 16px; }
+.user-like-count { margin: 0 0 16px; padding: 6px 10px; border: 1px solid color-mix(in srgb, var(--berry) 38%, transparent); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--berry) 8%, transparent); color: var(--berry-deep); font-family: var(--font-mono); font-size: .63rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.user-like-count span { margin-right: 4px; color: var(--berry); }
 .section-heading h2, .about-copy h2, .contact-intro h2 { max-width: 620px; margin-bottom: 12px; font-size: clamp(2.7rem, 6vw, 5.1rem); line-height: .95; letter-spacing: -0.06em; }
 .section-heading > p:last-child { max-width: 340px; color: var(--ink-soft); line-height: 1.5; }
 .category-filters { display: flex; flex-wrap: wrap; gap: 9px; margin: -10px 0 30px; }
@@ -110,6 +121,7 @@ h1 { margin-bottom: 20px; font-size: clamp(4.3rem, 10vw, 8.6rem); line-height: 0
 
 .likemeter { display: flex; align-items: center; gap: 12px; margin-bottom: 19px; }
 .like-button { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; gap: 5px; padding: 6px 9px; border: 1px solid color-mix(in srgb, var(--berry) 38%, transparent); border-radius: var(--radius-pill); background: transparent; color: var(--berry-deep); }
+.like-button:disabled { cursor: wait; opacity: .65; }
 .like-button span:first-child { font-size: 1.25rem; line-height: 1; }
 .like-button.is-liked { border-color: var(--berry); background: color-mix(in srgb, var(--berry) 10%, transparent); color: var(--berry); }
 .like-number { font-family: var(--font-mono); font-size: .66rem; font-weight: 600; }
@@ -172,21 +184,6 @@ button.instagram-inquire-link { border: 0; padding: 0; background: transparent; 
 .instagram-prompt-close { position: absolute; top: 15px; right: 17px; display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid color-mix(in srgb, var(--ink) 28%, transparent); border-radius: 50%; background: transparent; color: var(--ink); font-size: 1.5rem; font-weight: 300; line-height: 1; }
 .instagram-prompt-close:hover { border-color: var(--berry); color: var(--berry-deep); }
 
-.bouquet-reveal { position: fixed; z-index: 22; inset: 0; display: grid; place-items: center; padding: 22px; background: color-mix(in srgb, var(--ink) 74%, var(--berry)); animation: lightbox-in .28s ease-out both; }
-.bouquet-reveal-panel { position: relative; width: min(570px, 100%); padding: clamp(30px, 7vw, 58px); border: 1px solid var(--canvas-soft); outline: 1px solid var(--ochre); outline-offset: -8px; border-radius: var(--radius-soft); background: var(--canvas); box-shadow: 0 22px 70px color-mix(in srgb, var(--ink) 48%, transparent), 0 0 0 8px color-mix(in srgb, var(--berry) 30%, transparent); text-align: center; animation: bouquet-panel-in .68s cubic-bezier(.22, 1, .36, 1) both; }
-.bouquet-art { display: grid; place-items: center; margin: -4px auto 8px; }
-.bouquet-art svg { width: min(248px, 70vw); height: auto; overflow: visible; }
-.bouquet-stems { fill: none; stroke: var(--moss); stroke-linecap: round; stroke-width: 3; }
-.bouquet-wrap { fill: color-mix(in srgb, var(--berry) 80%, var(--canvas)); stroke: var(--berry-deep); stroke-width: 1.5; }
-.bouquet-flower { transform-box: fill-box; transform-origin: center; animation: flower-bloom .82s cubic-bezier(.22, 1, .36, 1) both; }
-.bouquet-flower-left { animation-delay: .08s; }.bouquet-flower-center { animation-delay: .25s; }.bouquet-flower-right { animation-delay: .15s; }
-.flower-petal { stroke: var(--canvas); stroke-width: 1.5; }.flower-petal-berry { fill: var(--berry); }.flower-petal-ochre { fill: var(--ochre); }.flower-petal-plum { fill: var(--plum); }.flower-center { fill: var(--canvas-soft); stroke: var(--ink); stroke-width: 1.2; }
-.bouquet-reveal-panel h2 { max-width: 430px; margin: 0 auto 16px; font-size: clamp(2.35rem, 7vw, 4.25rem); line-height: .94; letter-spacing: -.065em; }
-.bouquet-reveal-note { margin-bottom: 25px; color: var(--ink-soft); font-size: 1rem; font-style: italic; }.bouquet-reveal-note span, .bouquet-reveal-note strong { display: inline-block; margin-top: 8px; color: var(--berry-deep); font-family: var(--font-mono); font-size: .7rem; font-style: normal; letter-spacing: .1em; text-transform: uppercase; }.bouquet-reveal-note strong { margin-top: 4px; color: var(--plum); }
-.bouquet-reveal-okay { padding: 12px 18px; border: 1px solid var(--berry); border-radius: var(--radius-pill); background: var(--berry); color: var(--canvas-soft); font-family: var(--font-mono); font-size: .68rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }.bouquet-reveal-okay:hover { border-color: var(--berry-deep); background: var(--berry-deep); }
-.bouquet-reveal-close { position: absolute; top: 15px; right: 17px; display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid color-mix(in srgb, var(--ink) 28%, transparent); border-radius: 50%; background: transparent; color: var(--ink); font-size: 1.5rem; font-weight: 300; line-height: 1; }.bouquet-reveal-close:hover { border-color: var(--berry); color: var(--berry-deep); }
-@keyframes flower-bloom { from { opacity: 0; transform: scale(.18) rotate(-18deg); } 68% { opacity: 1; transform: scale(1.12) rotate(4deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
-@keyframes bouquet-panel-in { from { opacity: 0; transform: translateY(18px) scale(.95); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 760px) {
   .site-header { min-height: 64px; }.menu-toggle { display: grid; gap: 5px; width: 44px; height: 44px; place-content: center; }.menu-toggle > span:not(.sr-only) { display: block; width: 22px; height: 1px; background: currentColor; }
@@ -195,6 +192,6 @@ button.instagram-inquire-link { border: 0; padding: 0; background: transparent; 
   .work-section, .about-section, .contact-section { padding-block: 76px; }.work-grid { gap: 20px; grid-template-columns: 1fr; }.work-card-pattern-0, .work-card-pattern-1, .work-card-pattern-2, .work-card-pattern-3, .work-card-pattern-4, .work-card-pattern-5 { grid-column: 1; margin-top: 0; }.work-image, .work-card-pattern-0 .work-image, .work-card-pattern-1 .work-image, .work-card-pattern-2 .work-image, .work-card-pattern-3 .work-image, .work-card-pattern-4 .work-image, .work-card-pattern-5 .work-image { height: 380px; }.about-section, .contact-section { grid-template-columns: 1fr; gap: 45px; }.about-image { width: calc(100% - 26px); }.about-copy h2, .contact-intro h2, .section-heading h2 { font-size: clamp(2.9rem, 14vw, 4.5rem); }.form-pair { grid-template-columns: 1fr; }.form-footer { align-items: flex-start; flex-direction: column; }.site-footer > div { flex-wrap: wrap; }.site-footer a:first-of-type { margin-left: 0; }
 }
 
-@media (max-width: 760px) { .lightbox { padding: 14px; }.lightbox-frame { padding: 9px; }.lightbox-frame img { max-width: calc(100vw - 42px); max-height: calc(100vh - 110px); }.lightbox-close { top: 12px; right: 12px; }.instagram-prompt { padding: 14px; }.instagram-prompt-panel { padding: 28px 22px; }.instagram-prompt-actions { align-items: stretch; flex-direction: column; }.instagram-copy-button, .instagram-open-button { width: 100%; }.bouquet-reveal { padding: 14px; }.bouquet-reveal-panel { padding: 30px 22px; }.bouquet-reveal-panel h2 { font-size: clamp(2.25rem, 13vw, 3.5rem); } }
+@media (max-width: 760px) { .lightbox { padding: 14px; }.lightbox-frame { padding: 9px; }.lightbox-frame img { max-width: calc(100vw - 42px); max-height: calc(100vh - 110px); }.lightbox-close { top: 12px; right: 12px; }.instagram-prompt { padding: 14px; }.instagram-prompt-panel { padding: 28px 22px; }.instagram-prompt-actions { align-items: stretch; flex-direction: column; }.instagram-copy-button, .instagram-open-button { width: 100%; } }
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } [data-reveal] { opacity: 1; transform: none; } .hero-chain path, .thread-path { stroke-dashoffset: 0; } .thread-needle { opacity: .96; transform: none; } .lightbox, .lightbox-panel, .instagram-prompt, .instagram-prompt-panel, .bouquet-reveal, .bouquet-reveal-panel, .bouquet-flower { animation: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } [data-reveal] { opacity: 1; transform: none; } .hero-chain path, .thread-path { stroke-dashoffset: 0; } .thread-needle { opacity: .96; transform: none; } .lightbox, .lightbox-panel, .instagram-prompt, .instagram-prompt-panel { animation: none; } }

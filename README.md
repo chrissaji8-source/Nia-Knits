@@ -1,3 +1,11 @@
+# Nia Knits
+
+## Live likes
+
+Likes are stored in Netlify Blobs through the `netlify/functions/likes.mjs` function. Deploy this project to Netlify for live, shared counts; no database credentials or separate service setup is required. The page refreshes the displayed counts every four seconds and immediately after a visitor likes or unlikes a piece.
+
+Each browser receives a locally stored anonymous visitor ID, which prevents it from adding more than one like to the same piece. This is not an account-based anti-abuse system.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.

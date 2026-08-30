@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import works from './data/works.json'
+import { fetchLikes, getVisitorId, saveLike } from './lib/likes'
 
 // The maker's Instagram username (without the @).
 const instagramHandle = 'nia_knits_27'
@@ -123,62 +124,8 @@ function InstagramPrompt({ work, copied, onCopy, onClose }) {
   )
 }
 
-function BouquetReveal({ open, onClose }) {
-  useEffect(() => {
-    if (!open) return undefined
-    const onKeyDown = (event) => {
-      if (event.key === 'Escape') onClose()
-    }
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    window.addEventListener('keydown', onKeyDown)
-    return () => {
-      document.body.style.overflow = previousOverflow
-      window.removeEventListener('keydown', onKeyDown)
-    }
-  }, [open, onClose])
-
-  if (!open) return null
-
-  return (
-    <div className="bouquet-reveal" role="dialog" aria-modal="true" aria-labelledby="bouquet-reveal-title" onClick={onClose}>
-      <div className="bouquet-reveal-panel" onClick={(event) => event.stopPropagation()}>
-        <button className="bouquet-reveal-close" type="button" aria-label="Close bouquet message" onClick={onClose}>×</button>
-        <div className="bouquet-art" aria-hidden="true">
-          <svg viewBox="0 0 220 170" focusable="false">
-            <path className="bouquet-stems" d="M108 157C105 119 88 79 61 48M109 157c2-44 3-78 3-117M111 157c13-39 32-75 62-105M108 157c-18-28-40-39-62-50M112 157c19-25 39-38 61-46" />
-            <g className="bouquet-flower bouquet-flower-left">
-              <circle className="flower-petal flower-petal-berry" cx="59" cy="43" r="15" />
-              <circle className="flower-petal flower-petal-berry" cx="45" cy="53" r="15" />
-              <circle className="flower-petal flower-petal-berry" cx="67" cy="58" r="15" />
-              <circle className="flower-center" cx="57" cy="52" r="8" />
-            </g>
-            <g className="bouquet-flower bouquet-flower-center">
-              <circle className="flower-petal flower-petal-ochre" cx="112" cy="31" r="16" />
-              <circle className="flower-petal flower-petal-ochre" cx="96" cy="43" r="16" />
-              <circle className="flower-petal flower-petal-ochre" cx="128" cy="44" r="16" />
-              <circle className="flower-center" cx="112" cy="39" r="8" />
-            </g>
-            <g className="bouquet-flower bouquet-flower-right">
-              <circle className="flower-petal flower-petal-plum" cx="173" cy="47" r="15" />
-              <circle className="flower-petal flower-petal-plum" cx="158" cy="57" r="15" />
-              <circle className="flower-petal flower-petal-plum" cx="181" cy="65" r="15" />
-              <circle className="flower-center" cx="171" cy="56" r="8" />
-            </g>
-            <path className="bouquet-wrap" d="M77 119c21 7 43 9 67 1l-9 31c-17 7-39 7-56 0z" />
-          </svg>
-        </div>
-        <p className="eyebrow">A little secret</p>
-        <h2 id="bouquet-reveal-title">Would you like to get coffee with me?</h2>
-        <p className="bouquet-reveal-note">I thought this was the sweetest way to ask. ☕<br /><span>For Nannu</span><br /><strong>By Chrissy</strong></p>
-        <button className="bouquet-reveal-okay" type="button" onClick={onClose}>Keep browsing <span aria-hidden="true">↗</span></button>
-      </div>
-    </div>
-  )
-}
-
-function LikeMeter({ work, liked, onToggle, highestLikes }) {
-  const displayLikes = work.likes + (liked ? 1 : 0)
+function LikeMeter({ work, likes, liked, onToggle, highestLikes, isUpdating, isAvailable }) {
+  const displayLikes = likes[work.id] || 0
   const fillWidth = highestLikes ? (displayLikes / highestLikes) * 100 : 0
 
   return (
@@ -188,6 +135,8 @@ function LikeMeter({ work, liked, onToggle, highestLikes }) {
         type="button"
         aria-pressed={liked}
         aria-label={`${liked ? 'Unlike' : 'Like'} ${work.title}`}
+        disabled={isUpdating || !isAvailable}
+        title={isAvailable ? undefined : 'Live likes are temporarily unavailable'}
         onClick={() => onToggle(work.id)}
       >
         <span aria-hidden="true">{liked ? '♥' : '♡'}</span>
@@ -202,22 +151,17 @@ function LikeMeter({ work, liked, onToggle, highestLikes }) {
 
 function App() {
   const revealRoot = useRef(null)
-  const bouquetClickCount = useRef(0)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [likedPieces, setLikedPieces] = useState(() => {
-    try {
-      const storedLikes = JSON.parse(localStorage.getItem('nia-knits-liked-pieces') || '[]')
-      return Array.isArray(storedLikes) ? storedLikes : []
-    } catch {
-      return []
-    }
-  })
+  const [visitorId] = useState(getVisitorId)
+  const [likedPieces, setLikedPieces] = useState([])
+  const [likes, setLikes] = useState(() => Object.fromEntries(works.map((work) => [work.id, 0])))
+  const [likesAvailable, setLikesAvailable] = useState(false)
+  const [updatingLikeIds, setUpdatingLikeIds] = useState([])
   const [regarding, setRegarding] = useState(() => new URLSearchParams(window.location.search).get('piece') || '')
   const [activeCategory, setActiveCategory] = useState('All')
   const [lightboxImage, setLightboxImage] = useState(null)
   const [instagramPiece, setInstagramPiece] = useState(null)
   const [copiedPiece, setCopiedPiece] = useState('')
-  const [bouquetRevealOpen, setBouquetRevealOpen] = useState(false)
 
   useEffect(() => {
     const root = revealRoot.current
@@ -239,10 +183,40 @@ function App() {
     return () => observer.disconnect()
   }, [activeCategory])
 
+  useEffect(() => {
+    let isCurrent = true
+
+    const refreshLikes = async () => {
+      try {
+        const data = await fetchLikes(visitorId)
+        if (!isCurrent) return
+        setLikes(data.likes)
+        setLikedPieces(data.likedPieceIds)
+        setLikesAvailable(true)
+      } catch {
+        if (isCurrent) setLikesAvailable(false)
+      }
+    }
+
+    void refreshLikes()
+    const intervalId = window.setInterval(() => void refreshLikes(), 4000)
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === 'visible') void refreshLikes()
+    }
+    document.addEventListener('visibilitychange', refreshWhenVisible)
+
+    return () => {
+      isCurrent = false
+      window.clearInterval(intervalId)
+      document.removeEventListener('visibilitychange', refreshWhenVisible)
+    }
+  }, [visitorId])
+
   const highestLikes = useMemo(
-    () => Math.max(...works.map((work) => work.likes + (likedPieces.includes(work.id) ? 1 : 0))),
-    [likedPieces],
+    () => Math.max(...works.map((work) => likes[work.id] || 0)),
+    [likes],
   )
+  const userLikeCount = likedPieces.length
 
   const categories = useMemo(
     () => ['All', ...new Set(works.map((work) => work.category).filter(Boolean))],
@@ -254,29 +228,32 @@ function App() {
     [activeCategory],
   )
 
-  const toggleLike = (id) => {
-    // To make likes shared between visitors, replace this localStorage layer with a small backend (for example Supabase); the UI can keep this interface.
-    setLikedPieces((current) => {
-      const next = current.includes(id) ? current.filter((pieceId) => pieceId !== id) : [...current, id]
-      localStorage.setItem('nia-knits-liked-pieces', JSON.stringify(next))
-      return next
-    })
+  const toggleLike = async (id) => {
+    if (!likesAvailable || updatingLikeIds.includes(id)) return
+
+    const previouslyLikedPieces = likedPieces
+    const previousLikeCount = likes[id] || 0
+    const liked = !previouslyLikedPieces.includes(id)
+
+    setUpdatingLikeIds((current) => [...current, id])
+    setLikedPieces(liked ? [...previouslyLikedPieces, id] : previouslyLikedPieces.filter((pieceId) => pieceId !== id))
+    setLikes((current) => ({ ...current, [id]: Math.max(0, previousLikeCount + (liked ? 1 : -1)) }))
+
+    try {
+      const data = await saveLike(visitorId, id, liked)
+      setLikes(data.likes)
+      setLikedPieces(data.likedPieceIds)
+      setLikesAvailable(true)
+    } catch {
+      setLikes((current) => ({ ...current, [id]: previousLikeCount }))
+      setLikedPieces(previouslyLikedPieces)
+      setLikesAvailable(false)
+    } finally {
+      setUpdatingLikeIds((current) => current.filter((pieceId) => pieceId !== id))
+    }
   }
 
   const closeMenu = () => setMenuOpen(false)
-
-  const handleCategoryClick = (category) => {
-    if (category === 'Bouquets') {
-      bouquetClickCount.current += 1
-      if (bouquetClickCount.current === 5) {
-        setBouquetRevealOpen(true)
-        bouquetClickCount.current = 0
-      }
-    } else {
-      bouquetClickCount.current = 0
-    }
-    setActiveCategory(category)
-  }
 
   const copyInstagramMessage = async (work) => {
     const message = getInstagramMessage(work)
@@ -344,11 +321,15 @@ function App() {
 
         <section id="work" className="work-section section-shell" aria-labelledby="work-title">
           <div className="section-heading" data-reveal="heading">
-            <p className="eyebrow">Selected work · {works.length} pieces</p><h2 id="work-title">Made for keeping</h2><p>Little crochet objects with a generous point of view.</p>
+            <div className="work-heading-meta">
+              <p className="eyebrow">Selected work · {works.length} pieces</p>
+              <p className="user-like-count" aria-live="polite"><span aria-hidden="true">♥</span> Your likes: {userLikeCount}</p>
+            </div>
+            <h2 id="work-title">Made for keeping</h2><p>Little crochet objects with a generous point of view.</p>
           </div>
           <div className="category-filters" role="group" aria-label="Filter work by category">
             {categories.map((category) => (
-              <button key={category} type="button" className={activeCategory === category ? 'is-active' : ''} aria-pressed={activeCategory === category} onClick={() => handleCategoryClick(category)}>{category}</button>
+              <button key={category} type="button" className={activeCategory === category ? 'is-active' : ''} aria-pressed={activeCategory === category} onClick={() => setActiveCategory(category)}>{category}</button>
             ))}
           </div>
           <div className="work-grid">
@@ -359,7 +340,7 @@ function App() {
                 </div>
                 <div className="card-content">
                   <h3>{work.title}</h3><p className="work-description">{work.description}</p><p className="materials">{work.materials}</p>
-                  <LikeMeter work={work} liked={likedPieces.includes(work.id)} onToggle={toggleLike} highestLikes={highestLikes} />
+                  <LikeMeter work={work} likes={likes} liked={likedPieces.includes(work.id)} onToggle={toggleLike} highestLikes={highestLikes} isUpdating={updatingLikeIds.includes(work.id)} isAvailable={likesAvailable} />
                   <div className="card-actions">
                     <a className="inquire-link" href={`?piece=${encodeURIComponent(work.title)}#contact`}>Inquire about this piece <span aria-hidden="true">↗</span></a>
                     <button className="instagram-inquire-link" type="button" title="Shows a ready message and opens Instagram" aria-label={copiedPiece === work.id ? 'Message ready for Instagram' : `Ask about ${work.title} on Instagram`} onClick={() => { setInstagramPiece(work); void copyInstagramMessage(work) }}>
@@ -404,7 +385,6 @@ function App() {
       <footer className="site-footer section-shell"><ChainLine className="footer-chain" /><div><span>© {new Date().getFullYear()} Nia Knits</span><a href={instagramProfileUrl} target="_blank" rel="noreferrer">Instagram</a><a href={getGmailComposeUrl()} target="_blank" rel="noreferrer">{placeholderEmail}</a></div></footer>
       <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />
       <InstagramPrompt work={instagramPiece} copied={copiedPiece === instagramPiece?.id} onCopy={copyInstagramMessage} onClose={() => setInstagramPiece(null)} />
-      <BouquetReveal open={bouquetRevealOpen} onClose={() => setBouquetRevealOpen(false)} />
     </>
   )
 }
