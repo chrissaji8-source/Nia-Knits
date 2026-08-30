@@ -2,8 +2,10 @@ const LIKES_ENDPOINT = '/api/likes'
 const VISITOR_ID_STORAGE_KEY = 'nia-knits-like-visitor-id'
 
 const createVisitorId = () => {
-  if (crypto.randomUUID) return crypto.randomUUID()
-  return `${Date.now()}-${Math.random().toString(36).slice(2)}`
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID()
+  }
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`
 }
 
 export const getVisitorId = () => {
@@ -19,7 +21,8 @@ export const getVisitorId = () => {
   }
 }
 
-const getPayload = async (response) => {
+const getPayload = async (requestPromise) => {
+  const response = await requestPromise
   if (!response.ok) throw new Error(`Like request failed with ${response.status}`)
   return response.json()
 }

@@ -6,6 +6,8 @@ Likes are stored in Netlify Blobs through the `netlify/functions/likes.mjs` func
 
 Each browser receives a locally stored anonymous visitor ID, which prevents it from adding more than one like to the same piece. This is not an account-based anti-abuse system.
 
+For local testing, run `npm run dev` and open `http://localhost:8888`. It starts Netlify's local runtime alongside Vite, so the live-likes API works locally as well. `npm run dev:vite` is available for frontend-only work, but its likes API is intentionally unavailable.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.

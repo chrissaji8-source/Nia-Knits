@@ -99,12 +99,17 @@ const updateLike = async ({ visitorId, pieceId, liked }) => {
 
 export default async (request) => {
   const url = new URL(request.url)
-  const visitorId = request.method === 'GET' ? url.searchParams.get('visitorId') : undefined
 
   if (request.method === 'GET') {
+    const visitorId = url.searchParams.get('visitorId')
     if (!isVisitorId(visitorId)) return json({ error: 'A valid visitor id is required.' }, 400)
-    const { state } = await getLikes()
-    return json(toPayload(state, visitorId))
+    try {
+      const { state } = await getLikes()
+      return json(toPayload(state, visitorId))
+    } catch (error) {
+      console.error('Failed to fetch likes:', error)
+      return json({ error: 'Unable to retrieve likes at this time.' }, 500)
+    }
   }
 
   if (request.method === 'POST') {
@@ -115,13 +120,18 @@ export default async (request) => {
       return json({ error: 'The request body must be JSON.' }, 400)
     }
 
-    const { visitorId: bodyVisitorId, pieceId, liked } = payload
+    const { visitorId: bodyVisitorId, pieceId, liked } = payload || {}
     if (!isVisitorId(bodyVisitorId) || !WORK_ID_SET.has(pieceId) || typeof liked !== 'boolean') {
       return json({ error: 'The like request is invalid.' }, 400)
     }
 
-    const state = await updateLike({ visitorId: bodyVisitorId, pieceId, liked })
-    return json(toPayload(state, bodyVisitorId))
+    try {
+      const state = await updateLike({ visitorId: bodyVisitorId, pieceId, liked })
+      return json(toPayload(state, bodyVisitorId))
+    } catch (error) {
+      console.error('Failed to update like:', error)
+      return json({ error: 'Unable to update like at this time.' }, 500)
+    }
   }
 
   return json({ error: 'Method not allowed.' }, 405)
@@ -129,5 +139,4 @@ export default async (request) => {
 
 export const config = {
   path: '/api/likes',
-  method: ['GET', 'POST'],
 }

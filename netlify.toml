@@ -4,3 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+[dev]
+  command = "npm run dev:vite"
+  targetPort = 5173
+  port = 8888

@@ -6,12 +6,21 @@ import { fetchLikes, getVisitorId, saveLike } from './lib/likes'
 const instagramHandle = 'nia_knits_27'
 const instagramProfileUrl = `https://www.instagram.com/${instagramHandle.replace(/^@/, '')}/`
 const instagramDmUrl = `https://ig.me/m/${instagramHandle.replace(/^@/, '')}`
-const placeholderEmail = 'Joseneha55@gmail.com'
+const contactEmail = 'Joseneha55@gmail.com'
+
 const getGmailComposeUrl = ({ subject = '', body = '' } = {}) => {
-  const params = new URLSearchParams({ view: 'cm', fs: '1', to: placeholderEmail })
+  const params = new URLSearchParams({ view: 'cm', fs: '1', to: contactEmail })
   if (subject) params.set('su', subject)
   if (body) params.set('body', body)
   return `https://mail.google.com/mail/?${params.toString()}`
+}
+
+const getMailtoUrl = ({ subject = '', body = '' } = {}) => {
+  const params = new URLSearchParams()
+  if (subject) params.set('subject', subject)
+  if (body) params.set('body', body)
+  const query = params.toString()
+  return `mailto:${contactEmail}${query ? `?${query}` : ''}`
 }
 
 const getInstagramMessage = (work) => `Hi! I’d love to ask about “${work.title}”. Is it available, and what is the price?`
@@ -29,7 +38,7 @@ function InstagramIcon() {
 function ChainLine({ className = '' }) {
   return (
     <svg className={`chain-line ${className}`} viewBox="0 0 430 34" aria-hidden="true" focusable="false">
-      <path d="M3 18c8-17 22-17 30 0s22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0" />
+      <path d="M3 18c8-17 22-17 30 0s22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0 22-17 30 0 22 17 30 0" />
     </svg>
   )
 }
@@ -48,7 +57,7 @@ function WorkMedia({ work, onOpenImage }) {
   const altText = `${work.title}. ${work.description}`
   if (work.video) {
     return (
-      <video autoPlay muted loop playsInline poster={work.images?.[0]} aria-label={altText}>
+      <video autoPlay muted loop playsInline controls poster={work.images?.[0]} aria-label={altText}>
         <source src={work.video} type="video/mp4" />
       </video>
     )
@@ -61,25 +70,53 @@ function WorkMedia({ work, onOpenImage }) {
 }
 
 function Lightbox({ image, onClose }) {
+  const dialogRef = useRef(null)
+  const closeButtonRef = useRef(null)
+  const previousActiveElement = useRef(null)
+
   useEffect(() => {
     if (!image) return undefined
+    previousActiveElement.current = document.activeElement
+    closeButtonRef.current?.focus()
+
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') onClose()
+      if (event.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (event.key === 'Tab' && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first.focus()
+        }
+      }
     }
+
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKeyDown)
+
     return () => {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', onKeyDown)
+      if (previousActiveElement.current && typeof previousActiveElement.current.focus === 'function') {
+        previousActiveElement.current.focus()
+      }
     }
   }, [image, onClose])
 
   if (!image) return null
 
   return (
-    <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${image.title} enlarged view`} onClick={onClose}>
-      <button className="lightbox-close" type="button" aria-label="Close enlarged image" onClick={onClose}>×</button>
+    <div ref={dialogRef} className="lightbox" role="dialog" aria-modal="true" aria-label={`${image.title} enlarged view`} onClick={onClose}>
+      <button ref={closeButtonRef} className="lightbox-close" type="button" aria-label="Close enlarged image" onClick={onClose}>×</button>
       <div className="lightbox-panel" onClick={(event) => event.stopPropagation()}>
         <div className="lightbox-frame">
           <img src={image.src} alt={image.alt} />
@@ -91,26 +128,54 @@ function Lightbox({ image, onClose }) {
 }
 
 function InstagramPrompt({ work, copied, onCopy, onClose }) {
+  const dialogRef = useRef(null)
+  const closeButtonRef = useRef(null)
+  const previousActiveElement = useRef(null)
+
   useEffect(() => {
     if (!work) return undefined
+    previousActiveElement.current = document.activeElement
+    closeButtonRef.current?.focus()
+
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') onClose()
+      if (event.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (event.key === 'Tab' && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first.focus()
+        }
+      }
     }
+
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKeyDown)
+
     return () => {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', onKeyDown)
+      if (previousActiveElement.current && typeof previousActiveElement.current.focus === 'function') {
+        previousActiveElement.current.focus()
+      }
     }
   }, [work, onClose])
 
   if (!work) return null
 
   return (
-    <div className="instagram-prompt" role="dialog" aria-modal="true" aria-labelledby="instagram-prompt-title" onClick={onClose}>
+    <div ref={dialogRef} className="instagram-prompt" role="dialog" aria-modal="true" aria-labelledby="instagram-prompt-title" onClick={onClose}>
       <div className="instagram-prompt-panel" onClick={(event) => event.stopPropagation()}>
-        <button className="instagram-prompt-close" type="button" aria-label="Close Instagram message prompt" onClick={onClose}>×</button>
+        <button ref={closeButtonRef} className="instagram-prompt-close" type="button" aria-label="Close Instagram message prompt" onClick={onClose}>×</button>
         <p className="eyebrow">Message ready</p>
         <h2 id="instagram-prompt-title">Ask about {work.title}</h2>
         <p className="instagram-prompt-message">{getInstagramMessage(work)}</p>
@@ -142,7 +207,14 @@ function LikeMeter({ work, likes, liked, onToggle, highestLikes, isUpdating, isA
         <span aria-hidden="true">{liked ? '♥' : '♡'}</span>
         <span className="like-number">{displayLikes}</span>
       </button>
-      <div className="meter-track" aria-label={`${displayLikes} likes, relative popularity meter`}>
+      <div
+        className="meter-track"
+        role="meter"
+        aria-label={`${work.title} popularity meter`}
+        aria-valuenow={displayLikes}
+        aria-valuemin={0}
+        aria-valuemax={highestLikes || 1}
+      >
         <div className="meter-fill" style={{ width: `${fillWidth}%` }} />
       </div>
     </div>
@@ -164,11 +236,20 @@ function App() {
   const [copiedPiece, setCopiedPiece] = useState('')
 
   useEffect(() => {
+    if (!menuOpen) return undefined
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [menuOpen])
+
+  useEffect(() => {
     const root = revealRoot.current
     if (!root) return undefined
-    const revealables = root.querySelectorAll('[data-reveal]')
+    const unrevealed = root.querySelectorAll('[data-reveal]:not(.is-revealed)')
     if (!('IntersectionObserver' in window)) {
-      revealables.forEach((element) => element.classList.add('is-revealed'))
+      unrevealed.forEach((element) => element.classList.add('is-revealed'))
       return undefined
     }
     const observer = new IntersectionObserver((entries) => {
@@ -178,8 +259,8 @@ function App() {
           observer.unobserve(entry.target)
         }
       })
-    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' })
-    revealables.forEach((element) => observer.observe(element))
+    }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' })
+    unrevealed.forEach((element) => observer.observe(element))
     return () => observer.disconnect()
   }, [activeCategory])
 
@@ -187,6 +268,7 @@ function App() {
     let isCurrent = true
 
     const refreshLikes = async () => {
+      if (typeof document !== 'undefined' && document.visibilityState !== 'visible') return
       try {
         const data = await fetchLikes(visitorId)
         if (!isCurrent) return
@@ -199,7 +281,10 @@ function App() {
     }
 
     void refreshLikes()
-    const intervalId = window.setInterval(() => void refreshLikes(), 4000)
+    const intervalId = window.setInterval(() => {
+      if (document.visibilityState === 'visible') void refreshLikes()
+    }, 15000)
+
     const refreshWhenVisible = () => {
       if (document.visibilityState === 'visible') void refreshLikes()
     }
@@ -213,7 +298,7 @@ function App() {
   }, [visitorId])
 
   const highestLikes = useMemo(
-    () => Math.max(...works.map((work) => likes[work.id] || 0)),
+    () => Math.max(1, ...works.map((work) => likes[work.id] || 0)),
     [likes],
   )
   const userLikeCount = likedPieces.length
@@ -255,6 +340,16 @@ function App() {
 
   const closeMenu = () => setMenuOpen(false)
 
+  const handleInquire = (pieceTitle) => {
+    setRegarding(pieceTitle)
+    const contactSection = document.getElementById('contact')
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' })
+      const regardingInput = document.querySelector('input[name="regarding"]')
+      regardingInput?.focus()
+    }
+  }
+
   const copyInstagramMessage = async (work) => {
     const message = getInstagramMessage(work)
     try {
@@ -283,8 +378,12 @@ function App() {
     const form = new FormData(event.currentTarget)
     const subject = `Nia Knits inquiry: ${form.get('regarding') || 'a crochet piece'}`
     const body = `Name: ${form.get('name')}\nEmail: ${form.get('email')}\n\n${form.get('message')}`
-    const composeWindow = window.open(getGmailComposeUrl({ subject, body }), '_blank', 'noopener,noreferrer')
-    if (!composeWindow) window.location.href = getGmailComposeUrl({ subject, body })
+    const gmailUrl = getGmailComposeUrl({ subject, body })
+    const mailtoUrl = getMailtoUrl({ subject, body })
+    const composeWindow = window.open(gmailUrl, '_blank', 'noopener,noreferrer')
+    if (!composeWindow) {
+      window.location.href = mailtoUrl
+    }
   }
 
   return (
@@ -332,17 +431,18 @@ function App() {
               <button key={category} type="button" className={activeCategory === category ? 'is-active' : ''} aria-pressed={activeCategory === category} onClick={() => setActiveCategory(category)}>{category}</button>
             ))}
           </div>
-          <div className="work-grid">
+          <div className={`work-grid ${activeCategory !== 'All' ? 'is-filtered' : ''}`}>
             {visibleWorks.map((work, index) => (
               <article className={`work-card work-card-pattern-${index % 6}`} data-reveal="card" style={{ '--stitch-delay': `${index * 90}ms` }} key={work.id}>
                 <div className={`work-image crop-${work.id}`}>
                   <WorkMedia work={work} onOpenImage={setLightboxImage} /><span className="piece-number">{String(index + 1).padStart(2, '0')}</span><ThreadNeedle variation={index % 3} />
                 </div>
                 <div className="card-content">
-                  <h3>{work.title}</h3><p className="work-description">{work.description}</p><p className="materials">{work.materials}</p>
+                  <h3>{work.title}</h3><p className="work-description">{work.description}</p>
+                  {work.materials ? <p className="materials">{work.materials}</p> : null}
                   <LikeMeter work={work} likes={likes} liked={likedPieces.includes(work.id)} onToggle={toggleLike} highestLikes={highestLikes} isUpdating={updatingLikeIds.includes(work.id)} isAvailable={likesAvailable} />
                   <div className="card-actions">
-                    <a className="inquire-link" href={`?piece=${encodeURIComponent(work.title)}#contact`}>Inquire about this piece <span aria-hidden="true">↗</span></a>
+                    <button className="inquire-link" type="button" onClick={() => handleInquire(work.title)}>Inquire about this piece <span aria-hidden="true">↗</span></button>
                     <button className="instagram-inquire-link" type="button" title="Shows a ready message and opens Instagram" aria-label={copiedPiece === work.id ? 'Message ready for Instagram' : `Ask about ${work.title} on Instagram`} onClick={() => { setInstagramPiece(work); void copyInstagramMessage(work) }}>
                       <InstagramIcon />
                       <span>{copiedPiece === work.id ? 'Message ready' : 'Ask on Instagram'}</span>
@@ -377,12 +477,12 @@ function App() {
             <div className="form-pair"><label>Name<input name="name" type="text" autoComplete="name" required /></label><label>Email<input name="email" type="email" autoComplete="email" required /></label></div>
             <label>Regarding<input name="regarding" type="text" value={regarding} onChange={(event) => setRegarding(event.target.value)} placeholder="A piece, a commission, a question…" /></label>
             <label>Message<textarea name="message" rows="5" required placeholder="Tell me what you have in mind." /></label>
-            <div className="form-footer"><p>Messages open in Gmail and are sent to <span>{placeholderEmail}</span>.</p><button type="submit">Send a note <span aria-hidden="true">↗</span></button></div>
+            <div className="form-footer"><p>Messages open in Gmail and are sent to <span>{contactEmail}</span>.</p><button type="submit">Send a note <span aria-hidden="true">↗</span></button></div>
           </form>
         </section>
       </main>
 
-      <footer className="site-footer section-shell"><ChainLine className="footer-chain" /><div><span>© {new Date().getFullYear()} Nia Knits</span><a href={instagramProfileUrl} target="_blank" rel="noreferrer">Instagram</a><a href={getGmailComposeUrl()} target="_blank" rel="noreferrer">{placeholderEmail}</a></div></footer>
+      <footer className="site-footer section-shell"><ChainLine className="footer-chain" /><div><span>© {new Date().getFullYear()} Nia Knits</span><a href={instagramProfileUrl} target="_blank" rel="noreferrer">Instagram</a><a href={getMailtoUrl()} target="_blank" rel="noreferrer">{contactEmail}</a></div></footer>
       <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />
       <InstagramPrompt work={instagramPiece} copied={copiedPiece === instagramPiece?.id} onCopy={copyInstagramMessage} onClose={() => setInstagramPiece(null)} />
     </>
