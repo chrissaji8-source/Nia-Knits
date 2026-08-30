@@ -227,7 +227,7 @@ function App() {
   const [visitorId] = useState(getVisitorId)
   const [likedPieces, setLikedPieces] = useState([])
   const [likes, setLikes] = useState(() => Object.fromEntries(works.map((work) => [work.id, 0])))
-  const [likesAvailable, setLikesAvailable] = useState(false)
+  const [likesAvailable, setLikesAvailable] = useState(true)
   const [updatingLikeIds, setUpdatingLikeIds] = useState([])
   const [regarding, setRegarding] = useState(() => new URLSearchParams(window.location.search).get('piece') || '')
   const [activeCategory, setActiveCategory] = useState('All')
