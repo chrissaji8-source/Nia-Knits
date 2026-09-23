@@ -5,8 +5,16 @@
     "title": "The Everlasting Crimson Rose",
     "description": "A single, stunning deep red crocheted rose is nestled among fresh baby's breath and yellow sprigs.",
     "materials": "Cotton blend · 3.5mm hook · Hand-crocheted petals",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.58 AM.jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.58 AM.jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "3.5mm Ergonomic Aluminum",
+    "estimatedCraftingHours": 6,
+    "stylingNotes": "Place as a solitary statement in a ceramic bud vase on a nightstand or open shelf.",
+    "careGuide": "Spot clean with damp cloth; dust with soft brush",
+    "dimensions": "Bloom: 8cm dia, Stem: 32cm",
+    "badge": "🌸 Hand-Tied"
   },
   {
     "id": "bouquet-placeholder-02",
@@ -14,8 +22,16 @@
     "title": "The Ivory Rose Trio",
     "description": "Three meticulously handcrafted white crocheted roses feature textured petals and detailed green sepals.",
     "materials": "Fine acrylic cotton · Detailed wire stems · Handcrafted",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.59 AM (2).jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.59 AM (2).jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "3.0mm Soft-Grip Hook",
+    "estimatedCraftingHours": 14,
+    "stylingNotes": "Pairs elegantly in rustic stoneware alongside warm neutral linens and dried grasses.",
+    "careGuide": "Reshape wire stems gently; keep dry",
+    "dimensions": "Trio cluster: 35cm H, 16cm W",
+    "badge": "🌿 Heirloom Bouquet"
   },
   {
     "id": "bouquet-placeholder-03",
@@ -23,8 +39,16 @@
     "title": "The Scarlet Duet Bouquet",
     "description": "Two rich, red crocheted roses are beautifully contrasted with a vibrant backdrop of fresh, natural green foliage.",
     "materials": "Vibrant red yarn · Natural greenery accents · Hand-tied",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.27.00 AM.jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.27.00 AM.jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "3.5mm Ergonomic Hook",
+    "estimatedCraftingHours": 10,
+    "stylingNotes": "Stunning contrast on dark wood surfaces or mantelpieces; an enduring anniversary gift.",
+    "careGuide": "Keep away from harsh direct sunlight to preserve deep crimson",
+    "dimensions": "Double cluster: 30cm H, 14cm W",
+    "badge": "❤️ Enduring Gift"
   },
   {
     "id": "wearable-placeholder-01",
@@ -32,8 +56,16 @@
     "title": "Lavender Haze Ruffle Top",
     "description": "Channel retro summer vibes with this beautiful multi-toned purple halter. Featuring a classic granny-stitch body, a flattering ribbed bodice, and delicate tie-straps, it is a custom-made statement piece for sunny days.",
     "materials": "Soft lavender cotton · Ribbed bodice · Granny stitch",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.34 AM.jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.34 AM.jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "4.0mm Tulip Etimo Hook",
+    "estimatedCraftingHours": 18,
+    "stylingNotes": "Layer over high-waisted linen trousers or vintage flared denim for sunlit cafe afternoons.",
+    "careGuide": "Hand wash cold with wool-safe wash; dry flat",
+    "dimensions": "Custom XS–XXL (adjustable back lace-up)",
+    "badge": "👗 Custom Fit"
   },
   {
     "id": "wearable-placeholder-02",
@@ -41,8 +73,16 @@
     "title": "Fuchsia Blossom Headband",
     "description": "Keep your hair swept back in style with this vibrant, scalloped crochet headband. The bold fuchsia tone and floral-inspired stitching offer a fun, comfortable, and practical accessory to complete any casual look.",
     "materials": "Elasticated cotton blend · Scalloped edge · Floral stitch",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.35 AM.jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.35 AM.jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "3.25mm Precision Hook",
+    "estimatedCraftingHours": 3.5,
+    "stylingNotes": "A bold pop of berry cheer to elevate loose waves, sleek low buns, or messy morning hair.",
+    "careGuide": "Gentle hand wash in lukewarm water; air dry",
+    "dimensions": "Circumference: 52–58cm (stretch), W: 6.5cm",
+    "badge": "✨ Quick Accent"
   },
   {
     "id": "wearable-placeholder-03",
@@ -50,8 +90,16 @@
     "title": "Goldenrod Grid Sweater",
     "description": "A trendy, lightweight yellow mesh top perfect for layering over your favorite tees or bralettes. Its relaxed fit and breathable open-stitch design make it a versatile staple for breezy days and casual weekend outings.",
     "materials": "Breathable yellow mesh · Open weave · Custom fit",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.59 AM.jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.59 AM.jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "5.0mm Bamboo Hook",
+    "estimatedCraftingHours": 26,
+    "stylingNotes": "Drape effortlessly over a slip dress or high-neck ribbed tank for an airy golden-hour look.",
+    "careGuide": "Hand wash cold flat; store folded, never hanging",
+    "dimensions": "Relaxed drop-shoulder (Bust: 106cm, L: 50cm)",
+    "badge": "☀️ Layering Essential"
   },
   {
     "id": "wearable-placeholder-04",
@@ -59,8 +107,16 @@
     "title": "Coral Breeze Tie-Front Cardigan",
     "description": "Soft, romantic, and effortlessly stylish, this coral-pink crocheted overlay features delicate stitching and a playful front tie. It is the perfect throw-on piece to add a pop of color and texture to a simple top and jeans.",
     "materials": "Coral pink lightweight acrylic · Front-tie lace · Hand-finished",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.27.00 AM (1).jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.27.00 AM (1).jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "4.5mm Ergonomic Hook",
+    "estimatedCraftingHours": 22,
+    "stylingNotes": "Tie loosely over a crisp white sundress or style open over swimwear on coastal getaways.",
+    "careGuide": "Hand wash cool, press excess water in towel, dry flat",
+    "dimensions": "Cropped fit (Bust: 96cm, Sleeve: 56cm)",
+    "badge": "🌸 Soft Romantic"
   },
   {
     "id": "home-placeholder-01",
@@ -68,8 +124,16 @@
     "title": "Midnight Lace Table Drape",
     "description": "Midnight Lace Table Drape is a delicate, hand-crocheted table covering that adds a touch of elegance to any dining or coffee table. Its intricate lace pattern and midnight hue make it a versatile piece for both everyday use and special occasions.",
     "materials": "Midnight black lace thread · Delicate floral lattice · Hand-woven",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.27.02 AM.jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.27.02 AM.jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "2.0mm Steel Hook",
+    "estimatedCraftingHours": 32,
+    "stylingNotes": "Center atop light oak or marble tables with brass candleholders for an enchanting moody tablescape.",
+    "careGuide": "Hand wash gently; pin and steam-block to maintain symmetry",
+    "dimensions": "Diameter: 75cm (round medallion)",
+    "badge": "🪴 Statement Centerpiece"
   },
   {
     "id": "home-placeholder-02",
@@ -77,8 +141,16 @@
     "title": "The Smiling Succulent Trio",
     "description": "Brighten up your desk or windowsill with these zero-maintenance, endlessly cheerful crocheted cacti. Complete with quirky googly eyes and rosy cheeks, they bring all the joy of a houseplant without a single drop of water.",
     "materials": "Textured green yarn · Terracotta cups · Hand-embroidered",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.46 AM (1).jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.46 AM (1).jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "2.75mm Hook",
+    "estimatedCraftingHours": 8,
+    "stylingNotes": "Perch along a sunlit windowsill, computer monitor riser, or study bookshelf for an instant smile.",
+    "careGuide": "Spot dust; zero watering needed forever",
+    "dimensions": "Set of 3: each ~11cm tall in 6cm pot",
+    "badge": "🌵 Zero Maintenance"
   },
   {
     "id": "home-placeholder-03",
@@ -86,8 +158,16 @@
     "title": "Twilight Woven Runner",
     "description": "A sleek, modern crocheted table runner designed to elevate your dining room or console table. Its deep, rich tones and geometric mesh stitching provide a sophisticated, textured backdrop for vases and family dinners.",
     "materials": "Deep plum yarn · Geometric mesh stitch · Heavy drape",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.59 AM (1).jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.59 AM (1).jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "4.5mm Heavy Hook",
+    "estimatedCraftingHours": 20,
+    "stylingNotes": "Ground your dining table with rich plum texture; pairs gorgeously with ceramic dinnerware.",
+    "careGuide": "Machine wash delicate in mesh bag; lay flat",
+    "dimensions": "Length: 120cm, Width: 32cm",
+    "badge": "🏡 Modern Folk"
   },
   {
     "id": "small-thing-placeholder-01",
@@ -95,8 +175,16 @@
     "title": "Friendly Frog Appliqués",
     "description": "Add a hop of personality to your favorite bags, jackets, or accessories with these adorable green frog patches. Handcrafted with wide smiles and big eyes, they bring a fun, cottagecore vibe to everyday items.",
     "materials": "Vibrant green acrylic · Embroidered eyes · Sew-on patch",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.36 AM.jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.36 AM.jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "2.5mm Precision Hook",
+    "estimatedCraftingHours": 2.5,
+    "stylingNotes": "Stitch onto denim jacket pockets, canvas totes, or beanie cuffs for a playful cottagecore accent.",
+    "careGuide": "Iron-on or sew-on; wash garments inside out",
+    "dimensions": "Set of 2: 6.5cm x 5.5cm each",
+    "badge": "🐸 Cottagecore Charm"
   },
   {
     "id": "small-thing-placeholder-02",
@@ -104,8 +192,16 @@
     "title": "Pastel Pucker-Up Pals",
     "description": "Quirky, colorful, and impossible to ignore, these whimsical little companions are perfect for clipping onto backpacks or keys. With their exaggerated features and soft pastel yarn, they are guaranteed conversation starters.",
     "materials": "Pastel baby yarn · Keychain hardware · Amigurumi",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.37 AM.jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.37 AM.jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "3.0mm Soft Hook",
+    "estimatedCraftingHours": 3,
+    "stylingNotes": "Clip onto backpack zippers, canvas tote handles, or car keys as a tactile, squishy buddy.",
+    "careGuide": "Spot clean with mild soapy water",
+    "dimensions": "Charm: 7cm x 6cm plus 4cm clip",
+    "badge": "🔑 Pocket Companion"
   },
   {
     "id": "small-thing-placeholder-03",
@@ -113,7 +209,15 @@
     "title": "Friendly Neighborhood Web-Slinger",
     "description": "Your favorite comic book hero, reimagined in cozy crochet form. This pocket-sized amigurumi features iconic red and blue detailing with expressive stitched eyes, making it the ultimate collectible or keychain accessory.",
     "materials": "Red & blue cotton · Stitched webbing · Pocket amigurumi",
-    "images": ["/work/WhatsApp Image 2026-08-29 at 11.26.46 AM.jpeg"],
-    "likes": 0
+    "images": [
+      "/work/WhatsApp Image 2026-08-29 at 11.26.46 AM.jpeg"
+    ],
+    "likes": 0,
+    "hookSpecs": "2.5mm Precision Hook",
+    "estimatedCraftingHours": 5,
+    "stylingNotes": "A bespoke collector's amigurumi for pop-culture enthusiasts, perfect for desks and gifts.",
+    "careGuide": "Gently spot clean with damp cloth",
+    "dimensions": "Pocket amigurumi: ~12cm tall",
+    "badge": "🕷️ Artisan Collectible"
   }
 ]

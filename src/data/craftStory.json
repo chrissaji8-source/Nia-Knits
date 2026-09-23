@@ -1,0 +1,192 @@
+{
+  "makerBio": {
+    "name": "Neha Jose",
+    "brand": "Nia Knits",
+    "location": "Mumbai, India",
+    "origin": "Mumbai",
+    "education": "SYBCom graduate from St. Xavier's College, Mumbai",
+    "role": "Founder, Designer & Artisan",
+    "heroEyebrow": "The maker & the studio",
+    "heading": "Loops, colour, and a little bit of magic.",
+    "intro": "Hi, I’m Neha Jose — the hands and heart behind Nia Knits.",
+    "paragraphs": [
+      "I’m a girl with lots of hobbies and a heart full of creativity 💕 I love expressing myself through crochet, sewing, cooking, singing, and playing the guitar (still learning — no bar chords yet! 🎸).",
+      "I’m always curious, always creating, and always excited to learn something new. For me, every little idea is a chance to turn creativity into something tangible, comforting, and enduring ✨",
+      "I completed my SYBCom from St. Xavier’s College, Mumbai, and while balancing the modern professional world through my internship, I make sure my slow creative fiber world remains vibrant and deeply cherished 🌸",
+      "Crochet is one of the few ancient crafts that no modern machine can duplicate. Every loop you see here was pulled through by hand, counted stitch by stitch, with unhurried devotion."
+    ],
+    "philosophy": "Crochet is one of the few fiber arts that no modern machine can replicate. Every single stitch is placed deliberately by hand with patience and intention.",
+    "stampText": "Made by hand with care · Mumbai"
+  },
+  "polaroids": [
+    {
+      "id": "maker-portrait",
+      "src": "/work/WhatsApp Image 2026-08-29 at 2.04.37 PM.jpeg",
+      "alt": "Neha Jose smiling with handcrafted colourful crochet pieces in her Mumbai studio",
+      "caption": "Neha Jose · Loop by loop in Mumbai",
+      "angle": -3,
+      "washiColor": "rgba(212, 154, 114, 0.65)",
+      "badge": "✨ The Maker"
+    },
+    {
+      "id": "studio-halter",
+      "src": "/work/WhatsApp Image 2026-08-29 at 11.26.34 AM.jpeg",
+      "alt": "Lavender Haze halter top in progress showing intricate granny square stitches",
+      "caption": "Lavender Haze Halter · 3.5mm Hook",
+      "angle": 2.5,
+      "washiColor": "rgba(185, 77, 104, 0.45)",
+      "badge": "👗 Wearable Art"
+    },
+    {
+      "id": "studio-rose",
+      "src": "/work/WhatsApp Image 2026-08-29 at 11.26.58 AM.jpeg",
+      "alt": "Everlasting Crimson Rose crochet petals with leaf accents",
+      "caption": "Everlasting Crimson Rose · 100% Cotton",
+      "angle": -2,
+      "washiColor": "rgba(116, 129, 108, 0.45)",
+      "badge": "🌸 Hand-Tied"
+    },
+    {
+      "id": "studio-runner",
+      "src": "/work/WhatsApp Image 2026-08-29 at 11.27.02 AM.jpeg",
+      "alt": "Midnight Lace Table Drape with delicate open floral lattice pattern",
+      "caption": "Midnight Lace Table Drape · Heirloom Stitch",
+      "angle": 3.5,
+      "washiColor": "rgba(128, 97, 116, 0.45)",
+      "badge": "🪴 Heirloom Decor"
+    }
+  ],
+  "timelineSteps": [
+    {
+      "step": 1,
+      "title": "Palette Curation",
+      "tagline": "Color harmony & yarn sourcing",
+      "icon": "palette",
+      "specs": "Premium Cotton & Acrylics · Hand-swatched · Colorfast",
+      "quote": "The right palette sets the mood before the first chain stitch is ever made.",
+      "description": "Every creation starts with tactile harmony. Neha sources premium 100% cottons, lightweight acrylic blends, and fine lace threads. Colors are swatched together under natural light—from dusty rose and sunset ochre to vintage moss—to ensure the palette tells a cohesive story.",
+      "duration": "~1–2 Hours of Sourcing & Swatching",
+      "badge": "Phase 01"
+    },
+    {
+      "step": 2,
+      "title": "Meditative Stitching",
+      "tagline": "Row by row, loop by loop",
+      "icon": "crochet-hook",
+      "specs": "2.5mm – 5.0mm Hooks · 6–18 Crafting Hours · Zero Machinery",
+      "quote": "Crochet cannot be automated. When you wear a Nia Knits piece, you wear hours of human dedication.",
+      "description": "Using ergonomic hooks (2.5mm to 5.0mm), each row is counted and stitched by hand in quiet rhythm. From intricate granny square geometry and ribbed bodices to delicate open mesh and three-dimensional floral petals, each piece demands 6 to 18 hours of uninterrupted focus.",
+      "duration": "~6–18 Hours of Slow Stitching",
+      "badge": "Phase 02"
+    },
+    {
+      "step": 3,
+      "title": "Finishing & Lining",
+      "tagline": "Weaving ends & reinforced seams",
+      "icon": "shears",
+      "specs": "5-Pass Tail Locking · Wet/Steam Blocking · Hand-Sewn Linings",
+      "quote": "The inside and back of your work should be just as neat and proud as the front.",
+      "description": "An heirloom piece must endure years of wear. Yarn tails are woven through five hidden locking passes. Garments are hand-blocked for drape and fit, while bags and delicate tops are fitted with hand-sewn cotton or linen linings and secure custom ties.",
+      "duration": "~2–4 Hours of Tail Locking & Blocking",
+      "badge": "Phase 03"
+    },
+    {
+      "step": 4,
+      "title": "Gift Packaging",
+      "tagline": "Packed for keeping & giving",
+      "icon": "tied-parcel",
+      "specs": "Recycled Craft Tissue · Handwritten Care Guide · Keepsake Bloom Included",
+      "quote": "Packed with as much care as the stitches themselves, ready to gift immediately.",
+      "description": "Every order is wrapped in recycled craft tissue paper, secured with custom washi tape, and bundled with a handwritten care card and a mini crocheted keepsake flower. Unboxing feels like opening a warm letter from an old friend.",
+      "duration": "~30–45 Mins of Artisan Bundling",
+      "badge": "Phase 04"
+    }
+  ],
+  "hobbyChips": [
+    {
+      "id": "crochet",
+      "name": "Crochet",
+      "emoji": "🧶",
+      "accentColor": "--berry",
+      "hex": "#B94D68",
+      "tagline": "My anchor craft & meditative slow rhythm",
+      "anecdote": "My anchor craft! What started with a single ball of yarn became Nia Knits. I love creating slow, tactile things that bring comfort.",
+      "fact": "50+ heirloom pieces crafted",
+      "connection": "The heart of Nia Knits — loop by loop without machines."
+    },
+    {
+      "id": "guitar",
+      "name": "Guitar",
+      "emoji": "🎸",
+      "accentColor": "--ochre",
+      "hex": "#D49A72",
+      "tagline": "Acoustic melodies in quiet evenings",
+      "anecdote": "Strumming acoustic melodies in the evening. Still learning — avoiding barre chords at all costs! Taylor Swift and Laufey are on heavy rotation.",
+      "fact": "Zero barre chords mastered so far",
+      "connection": "Fingers building calluses for both guitar strings and yarn tension!"
+    },
+    {
+      "id": "cooking",
+      "name": "Cooking",
+      "emoji": "🍳",
+      "accentColor": "--moss",
+      "hex": "#74816C",
+      "tagline": "Comfort food & mindful baking",
+      "anecdote": "Mindful cooking and comforting bakes. Kneading dough and crocheting granny squares share the exact same rhythm.",
+      "fact": "Sunday bakes + yarn = pure bliss",
+      "connection": "Patience and precise proportions turn simple ingredients into nourishment."
+    },
+    {
+      "id": "sewing",
+      "name": "Sewing",
+      "emoji": "🧵",
+      "accentColor": "--plum",
+      "hex": "#806174",
+      "tagline": "Precision linings & tailored finishes",
+      "anecdote": "Stitching neat linen linings, sewing hidden zipper closures, and edging tote bags so every crochet creation holds its shape forever.",
+      "fact": "Precision hems meet soft yarn",
+      "connection": "Giving structural integrity and clean finished backings to fiber art."
+    },
+    {
+      "id": "singing",
+      "name": "Singing",
+      "emoji": "🎤",
+      "accentColor": "--berry-deep",
+      "hex": "#963B54",
+      "tagline": "Studio tunes humming with every row",
+      "anecdote": "Humming melodies while counting stitches. Music keeps my hands moving when working on 18-hour wearable projects.",
+      "fact": "Studio playlist always humming",
+      "connection": "Keeping the tempo steady when counting 120-stitch rows."
+    }
+  ],
+  "stickyNotes": [
+    {
+      "id": "note-1",
+      "text": "Made slowly in Mumbai 🌸",
+      "angle": -2,
+      "bg": "#FFF9E6",
+      "color": "#963B54"
+    },
+    {
+      "id": "note-2",
+      "text": "Zero bar chords on guitar so far! 🎸",
+      "angle": 2.5,
+      "bg": "#F7EBE8",
+      "color": "#705D62"
+    },
+    {
+      "id": "note-3",
+      "text": "Loop by loop, row by row ✨",
+      "angle": -1.5,
+      "bg": "#F0F5ED",
+      "color": "#74816C"
+    },
+    {
+      "id": "note-4",
+      "text": "No machines. Just hands, a hook, and patience 🧶",
+      "angle": 1.8,
+      "bg": "#F5EDF4",
+      "color": "#806174"
+    }
+  ]
+}
