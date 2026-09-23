@@ -13,7 +13,7 @@ export default function WorkPage({
   onInquire,
 }) {
   return (
-    <div className="page-work py-8 pb-24">
+    <div className="page-work pb-24">
       <ShowcaseSection
         works={works}
         likes={likes}

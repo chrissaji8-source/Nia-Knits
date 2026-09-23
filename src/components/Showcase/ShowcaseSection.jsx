@@ -112,7 +112,7 @@ export default function ShowcaseSection({
   return (
     <section id="work" className="work-section section-shell" aria-labelledby="work-title">
       {/* Section Header */}
-      <div className="section-heading" data-reveal="heading">
+      <div className="section-heading">
         <div className="work-heading-meta flex items-center justify-between flex-wrap gap-4 mb-4">
           <p className="eyebrow m-0">Selected work · {works.length} pieces</p>
           {calculatedUserLikeCount > 0 && (

@@ -64,7 +64,7 @@ export default function ContactPage({
   }
 
   return (
-    <div className="page-contact py-12 pb-24">
+    <div className="page-contact pt-4 pb-24">
       <section className="contact-section section-shell" aria-labelledby="contact-title">
         <div className="contact-intro">
           <p className="eyebrow">Say hello</p>

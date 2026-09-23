@@ -157,28 +157,17 @@ button.inquire-link { border: 0; padding: 0; background: transparent; cursor: po
   to { opacity: 1; transform: translateY(0); }
 }
 
-[data-reveal] { opacity: 0; transform: translateY(30px); transition: opacity .75s ease, transform .75s cubic-bezier(.22, 1, .36, 1); }
+[data-reveal] { opacity: 1; transform: none; }
 [data-reveal].is-revealed { opacity: 1; transform: none; }
-[data-reveal="card"] { transform: translateY(34px) rotate(.5deg); transition-delay: var(--stitch-delay, 0ms); }
-.thread-needle { position: absolute; z-index: 2; top: 13px; right: 12px; width: 106px; height: 62px; overflow: visible; opacity: 0; transform: translate(-18px, 10px) rotate(-5deg); }
-.thread-path { fill: none; stroke: var(--canvas-soft); stroke-linecap: round; stroke-width: 2.1; stroke-dasharray: 145; stroke-dashoffset: 145; }
-.needle-path { fill: none; stroke: var(--ochre); stroke-linecap: round; stroke-width: 2.6; transform-origin: 28px 54px; transform: rotate(-18deg); }
-.needle-eye { fill: var(--canvas-soft); stroke: var(--ochre); stroke-width: 2; }
-.work-card.is-revealed .thread-needle { opacity: .96; animation: needle-settle .7s cubic-bezier(.22, 1, .36, 1) calc(var(--stitch-delay, 0ms) + .2s) both; }
-.work-card.is-revealed .thread-path { animation: thread-stitch 1s ease-out calc(var(--stitch-delay, 0ms) + .25s) both; }
-.work-card.is-revealed .needle-path { animation: needle-sew 1s cubic-bezier(.22, 1, .36, 1) calc(var(--stitch-delay, 0ms) + .25s) both; }
-@keyframes thread-stitch { to { stroke-dashoffset: 0; } }
-@keyframes needle-settle { from { opacity: 0; transform: translate(-18px, 10px) rotate(-15deg); } to { opacity: .96; transform: translate(0, 0) rotate(-5deg); } }
-@keyframes needle-sew { 0% { transform: rotate(-28deg); } 45% { transform: rotate(15deg); } 100% { transform: rotate(-3deg); } }
 
-.work-section { padding-block: 90px 120px; }
-.section-heading { display: grid; margin-bottom: 42px; grid-template-columns: 1fr; }
-.work-heading-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 9px 16px; }
-.work-heading-meta .eyebrow { margin-bottom: 16px; }
-.user-like-count { margin: 0 0 16px; padding: 6px 10px; border: 1px solid color-mix(in srgb, var(--berry) 38%, transparent); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--berry) 8%, transparent); color: var(--berry-deep); font-family: var(--font-mono); font-size: .63rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.work-section { padding-block: 32px 80px; }
+.section-heading { display: grid; margin-bottom: 28px; grid-template-columns: 1fr; }
+.work-heading-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 9px 16px; margin-bottom: 8px; }
+.work-heading-meta .eyebrow { margin-bottom: 0; }
+.user-like-count { margin: 0; padding: 6px 10px; border: 1px solid color-mix(in srgb, var(--berry) 38%, transparent); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--berry) 8%, transparent); color: var(--berry-deep); font-family: var(--font-mono); font-size: .63rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
 .user-like-count span { margin-right: 4px; color: var(--berry); }
-.section-heading h2, .about-copy h2, .contact-intro h2 { max-width: 620px; margin-bottom: 12px; font-size: clamp(2.7rem, 6vw, 5.1rem); line-height: .95; letter-spacing: -0.06em; }
-.section-heading > p:last-child { max-width: 340px; color: var(--ink-soft); line-height: 1.5; }
+.section-heading h2, .about-copy h2, .contact-intro h2 { max-width: 620px; margin-bottom: 8px; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1; letter-spacing: -0.05em; }
+.section-heading > p:last-child { max-width: 480px; color: var(--ink-soft); line-height: 1.5; margin: 0; }
 .category-filters { display: flex; flex-wrap: wrap; gap: 9px; margin: -10px 0 30px; }
 .category-filters button { padding: 9px 14px; border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent); border-radius: var(--radius-pill); background: transparent; color: var(--ink-soft); font-family: var(--font-mono); font-size: .63rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
 .category-filters button:hover, .category-filters button.is-active { border-color: var(--berry); background: var(--berry); color: var(--canvas-soft); }
