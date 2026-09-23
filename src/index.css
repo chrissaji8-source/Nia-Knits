@@ -28,9 +28,28 @@ body {
   min-width: 320px;
   margin: 0;
   background-color: var(--canvas);
-  /* A quiet, repeating crochet stitch: visible on the paper, never competing with the work. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M2 12c4-7 10-7 14 0s10 7 14 0 10-7 16 0' fill='none' stroke='%23B94D68' stroke-opacity='.075' stroke-width='1.15' stroke-linecap='round'/%3E%3Cpath d='M2 36c4-7 10-7 14 0s10 7 14 0 10-7 16 0' fill='none' stroke='%23B94D68' stroke-opacity='.075' stroke-width='1.15' stroke-linecap='round'/%3E%3Cpath d='M12 2c-7 4-7 10 0 14s7 10 0 14-7 10 0 16' fill='none' stroke='%2374816C' stroke-opacity='.045' stroke-width='1.05' stroke-linecap='round'/%3E%3Cpath d='M36 2c-7 4-7 10 0 14s7 10 0 14-7 10 0 16' fill='none' stroke='%2374816C' stroke-opacity='.045' stroke-width='1.05' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-size: 48px 48px;
+  /* Tactile woven linen weft + delicate crochet chain stitches */
+  background-image:
+    repeating-linear-gradient(0deg, rgba(48, 38, 41, 0.018) 0px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(48, 38, 41, 0.018) 0px, transparent 1px, transparent 4px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M2 12c4-7 10-7 14 0s10 7 14 0 10-7 16 0' fill='none' stroke='%23B94D68' stroke-opacity='.075' stroke-width='1.15' stroke-linecap='round'/%3E%3Cpath d='M2 36c4-7 10-7 14 0s10 7 14 0 10-7 16 0' fill='none' stroke='%23B94D68' stroke-opacity='.075' stroke-width='1.15' stroke-linecap='round'/%3E%3Cpath d='M12 2c-7 4-7 10 0 14s7 10 0 14-7 10 0 16' fill='none' stroke='%2374816C' stroke-opacity='.045' stroke-width='1.05' stroke-linecap='round'/%3E%3Cpath d='M36 2c-7 4-7 10 0 14s7 10 0 14-7 10 0 16' fill='none' stroke='%2374816C' stroke-opacity='.045' stroke-width='1.05' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 8px 8px, 8px 8px, 48px 48px;
+}
+
+/* Organic Cotton & Linen Paper Texture Grain Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.042;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
 }
 button, input, textarea { font: inherit; }
 button { cursor: pointer; }
