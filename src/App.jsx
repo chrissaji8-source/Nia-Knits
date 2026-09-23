@@ -11,6 +11,7 @@ import CustomPage from './pages/CustomPage'
 import ContactPage from './pages/ContactPage'
 import FloatingBasketTrigger from './components/Basket/FloatingBasketTrigger'
 import BasketDrawer from './components/Basket/BasketDrawer'
+import VinylPlayer from './components/AudioPlayer/VinylPlayer'
 
 const instagramHandle = 'nia_knits_27'
 const instagramProfileUrl = `https://www.instagram.com/${instagramHandle.replace(/^@/, '')}/`
@@ -310,6 +311,7 @@ function NiaKnitsMain() {
       <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />
       <FloatingBasketTrigger />
       <BasketDrawer />
+      <VinylPlayer />
     </>
   )
 }
